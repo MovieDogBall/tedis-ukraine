@@ -18,12 +18,9 @@ $request = new Request($_GET, $_POST, $_SERVER, $_FILES, $_SERVER, $_COOKIE);
 $controller = new Controller($db);
 $viewHandler = new ViewHandler([]);
 
-if(!empty($request->get('tree'))){
-    echo $viewHandler->setTree($controller->getNodeTree())->getHtmlView();
-}
-
 if(!empty($request->post('elem'))){
     $controller->updateNodeTree($request);
     sleep(2);
-    echo $controller->getNodeTree();
 }
+
+echo $viewHandler->setTree($controller->getNodeTree())->getHtmlView();
