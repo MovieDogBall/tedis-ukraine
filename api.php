@@ -8,7 +8,6 @@ $db = new mysqli('localhost', 'root', '', 'tedis-ukraine');
 
 use Core\Controller;
 use Core\Request;
-use Core\Db;
 
 $request = new Request($_GET, $_POST, $_SERVER, $_FILES, $_SERVER, $_COOKIE);
 

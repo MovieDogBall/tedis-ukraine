@@ -1,7 +1,7 @@
 $(document).ready(function () {
     var url = "http://tedis-ukraine/api.php";
     $.get(url, {tree: true}).done(function (data) {
-        console.log(data);
+        $("#catalog").html(data);
     });
 
     $("#createForm").submit(function () {
@@ -24,7 +24,6 @@ $(document).ready(function () {
                     form.find('input[type="submit"]').attr('disabled', 'disabled');
                 },
                 success: function (data) {
-                    console.log(data);
                     if (data['error']) {
                         alert(data['error']);
                     } else {

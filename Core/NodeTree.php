@@ -16,8 +16,6 @@ class NodeTree
      */
     public function __construct(array $tree)
     {
-        var_dump($tree);
-        die;
         $this->tree = $tree;
     }
 
