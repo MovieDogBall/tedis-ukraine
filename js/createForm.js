@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    var url = "http://localhost/tedis-ukraine/api.php";
+    var url = "http://tedis-ukraine/api.php";
     $.get(url, {tree: true}).done(function (data) {
         $("#catalog").html(data);
     });
@@ -23,19 +23,13 @@ $(document).ready(function () {
                 beforeSend: function (data) {
                     form.find('input[type="submit"]').attr('disabled', 'disabled');
                 },
-                success: function (data) {
-                    if (data['error']) {
-                        alert(data['error']);
-                    } else {
-                        alert('GG');
-                    }
-                },
                 error: function (xhr, ajaxOptions, thrownError) {
                     alert(xhr.status);
                     alert(thrownError);
                 },
                 complete: function (data) {
                     form.find('input[type="submit"]').prop('disabled', false);
+                    $("#catalog").html(data.responseText);
                 }
 
             });

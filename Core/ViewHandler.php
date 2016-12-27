@@ -30,10 +30,10 @@ class ViewHandler
      */
     private function generateHtml($tree)
     {
-        $subTree = "<ul>";
+        $subTree = "<ul class=\"list-group\">";
 
         foreach ($tree as $key => $value) {
-            $subTree .= "<li>" . $value['name'];
+            $subTree .= "<li class=\"list-group-item\">" . $value['name'];
 
             if($this->isChildrenExist($value)){
                 $subTree .=  $this->generateHtml($value['children']) ;

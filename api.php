@@ -20,7 +20,6 @@ $viewHandler = new ViewHandler([]);
 
 if(!empty($request->post('elem'))){
     $controller->updateNodeTree($request);
-    sleep(2);
 }
 
 echo $viewHandler->setTree($controller->getNodeTree())->getHtmlView();
