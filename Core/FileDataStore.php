@@ -5,18 +5,20 @@ namespace Core;
 
 class FileDataStore implements \DataStore
 {
+    private $resourceName = 'Core/data.json';
+
     /**
      * FileDataStore constructor.
      */
-    public function __construct($db)
+    public function __construct()
     {
-        $this->db = $db;
     }
 
     public function update($data)
     {
-        $sql_query = "UPDATE tree_elems SET tree='$data' WHERE id=1";
-        $this->db->query($sql_query);
+        $fp = fopen($this->resourceName, 'w');
+        fwrite($fp, $data);
+        fclose($fp);
     }
 
     public function insert($data)
@@ -34,12 +36,13 @@ class FileDataStore implements \DataStore
      */
     public function get()
     {
-        $sql_query = "SELECT tree FROM tree_elems WHERE id=1";
-        $result = $this->db->query($sql_query);
-        $contents = $result->fetch_row();
-
-        $contents = json_decode($contents[0], true);
-
+        $handle = fopen($this->resourceName, "r");
+        $contents = [];
+        if(filesize($this->resourceName) > 0){
+            $contents = fread($handle, filesize($this->resourceName));
+            $contents = json_decode($contents, true);
+        }
+        fclose($handle);
         return $contents;
     }
 }

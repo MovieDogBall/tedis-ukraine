@@ -15,40 +15,27 @@ class Controller
      */
     public function __construct($db)
     {
-        $this->dataStore = new FileDataStore($db);
-    }
-
-    public function getNodeTree(){
-        $tree = $this->getStoredTree()->getTree();
-
-        $subTree = $this->getSubTree($tree);
-
-        return $subTree;
-
-    }
-
-    private function getSubTree($tree){
-        $subTree = "";
-
-        foreach ($tree as $key => $value){
-            if(is_array($value)){
-                $subTree .= "<ul>";
-                $subTree .= $this->getSubTree($value);
-            } else {
-                var_dump($value);
-                $subTree .= "<li>" .$value['name'];
-            }
-
-            $subTree .= "</ul>";
+        if (is_null($db)) {
+            $this->dataStore = new FileDataStore();
+        } else {
+            $this->dataStore = new DbDataStore($db);
         }
 
-        return $subTree;
+    }
+
+    /**
+     * @return array
+     */
+    public function getNodeTree()
+    {
+        return $this->getStoredTree()->getTree();
     }
 
     /**
      * @param $request
      */
-    public function updateNodeTree(Request $request){
+    public function updateNodeTree(Request $request)
+    {
         $existedTree = $this->getStoredTree();
         $node = $existedTree->handleNode($request);
         $existedTree->updateTree($node, $request);
@@ -59,7 +46,8 @@ class Controller
     /**
      * @return \Core\NodeTree
      */
-    private function getStoredTree(){
+    private function getStoredTree()
+    {
         $dataFromDB = $this->dataStore->get();
         return new NodeTree($dataFromDB);
     }

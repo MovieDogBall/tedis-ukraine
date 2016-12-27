@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    var url = "http://tedis-ukraine/api.php";
+    var url = "http://localhost/tedis-ukraine/api.php";
     $.get(url, {tree: true}).done(function (data) {
         $("#catalog").html(data);
     });
