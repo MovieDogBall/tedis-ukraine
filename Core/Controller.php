@@ -44,11 +44,17 @@ class Controller
     }
 
     /**
-     * @return \Core\NodeTree
+     * @return NodeTree
+     * @throws \Exception
      */
     private function getStoredTree()
     {
         $dataFromDB = $this->dataStore->get();
+
+        if(is_null($dataFromDB)){
+            throw new \Exception("Data From Data Store is Null");
+        }
+
         return new NodeTree($dataFromDB);
     }
 }

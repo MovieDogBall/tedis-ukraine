@@ -4,8 +4,8 @@ set_include_path('Core');
 spl_autoload_extensions(".php");
 spl_autoload_register();
 
-$db = new mysqli('localhost', 'root', '', 'tedis-ukraine');
-//$db = null;
+//$db = new mysqli('localhost', 'root', '', 'tedis-ukraine');
+$db = null;
 
 use Core\Controller;
 use Core\Request;
